@@ -1,4 +1,4 @@
-package m2ex;
+package  manuela/m2ex;
 
 public class Sorting {
     public static void swap(int[] data, int i, int j) {
