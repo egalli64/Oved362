@@ -1,5 +1,5 @@
 package claudio;
-
+//prova
 public class S02 {
 	/**
 	 * Average speed
