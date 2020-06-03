@@ -1,4 +1,4 @@
-package  manuela/m2ex;
+package  manuela.m2ex;
 
 //import java.util.Arrays;
 
