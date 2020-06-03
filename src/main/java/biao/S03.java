@@ -1,4 +1,4 @@
-package m2ex;
+package biao;
 
 public class S03 {
 	/**

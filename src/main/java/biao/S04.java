@@ -1,6 +1,4 @@
-package m2ex;
-
-import java.lang.Math;
+package biao;
 
 public class S04 {
 	/**
