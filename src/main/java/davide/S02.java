@@ -1,4 +1,4 @@
-package m2ex;
+package davide;
 
 public class S02 {
     /**
@@ -9,7 +9,7 @@ public class S02 {
      * @return speed in meters per second
      */
     public static double speed(double distance, double time) {
-        return distance/time;
+        return distance / time;
     }
 
     /**
@@ -35,7 +35,7 @@ public class S02 {
      * @return the engine capacity in cm^3
      */
     public static double engineCapacity(double bore, double stroke, int nr) {
-    	double result = (Math.pow((bore/2), 2)*Math.PI*stroke)*nr; 
+        double result = (Math.pow((bore / 2), 2) * Math.PI * stroke) * nr;
         double resultCm3 = result * 0.001;
         return resultCm3;
     }
@@ -47,13 +47,13 @@ public class S02 {
      * @return sum of digits
      */
     public static int digitSum(int value) {
-    	if(value < 0) {
-    		value *= -1;
-    	}
+        if (value < 0) {
+            value *= -1;
+        }
         int sum = 0;
         while (value > 0) {
-        	sum += value % 10;
-        	value /= 10;
+            sum += value % 10;
+            value /= 10;
         }
         return sum;
     }
@@ -69,13 +69,13 @@ public class S02 {
     public static int score(double x, double y) {
         double distance = Math.sqrt(Math.pow(x, 2) + Math.pow((y), 2));
         int score = 0;
-        
-        if((distance >= 0) && (distance <= 1) ) {
-        	score = 10;
+
+        if ((distance >= 0) && (distance <= 1)) {
+            score = 10;
         } else if ((distance > 1) && (distance <= 5)) {
-        	score = 5;
+            score = 5;
         } else if (distance < 10) {
-        	score = 1;
+            score = 1;
         }
         return score;
     }
