@@ -110,8 +110,19 @@ public class S04 {
 	 * @return the Fibonacci number of value, or zero
 	 */
 	public static long fibonacci(int value) {
+	//a sequence of integers where each number is the sum of the previous two, except the first two 
+			    if (value == 0)
+			      return 0;
+			    
+			    else if (value == 1)
+			      return 1;
+			    else {
+			      long f1 = fibonacci(value -1);
+			      long f2 = fibonacci(value -2);
+			      long result = f1 + f2;
+			      return result;
+			  }
 		
-		return 0;
 	}
 
 
