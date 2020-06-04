@@ -202,7 +202,85 @@ public class S08 {
 	 * @return true if no duplicates in
 	 */
 	public static boolean hasOnlyUnique(String s) {
-		throw new UnsupportedOperationException("Not yet implemented");
+		int[] arrayAlfabeto = new int[21];
+		s = s.toLowerCase();
+		for (int i = 0; i < s.length(); i++) {
+			switch (s.charAt(i)) {
+			case 'a':
+				arrayAlfabeto[0]++;
+				break;
+			case 'b':
+				arrayAlfabeto[1]++;
+				break;
+			case 'c':
+				arrayAlfabeto[2]++;
+				break;
+			case 'd':
+				arrayAlfabeto[3]++;
+				break;
+			case 'e':
+				arrayAlfabeto[4]++;
+				break;
+			case 'f':
+				arrayAlfabeto[5]++;
+				break;
+			case 'g':
+				arrayAlfabeto[6]++;
+				break;
+			case 'h':
+				arrayAlfabeto[7]++;
+				break;
+			case 'i':
+				arrayAlfabeto[8]++;
+				break;
+			case 'l':
+				arrayAlfabeto[9]++;
+				break;
+			case 'm':
+				arrayAlfabeto[10]++;
+				break;
+			case 'n':
+				arrayAlfabeto[11]++;
+				break;
+			case 'o':
+				arrayAlfabeto[12]++;
+				break;
+			case 'p':
+				arrayAlfabeto[13]++;
+				break;
+			case 'q':
+				arrayAlfabeto[14]++;
+				break;
+			case 'r':
+				arrayAlfabeto[15]++;
+				break;
+			case 's':
+				arrayAlfabeto[16]++;
+				break;
+			case 't':
+				arrayAlfabeto[17]++;
+				break;
+			case 'u':
+				arrayAlfabeto[18]++;
+				break;
+			case 'v':
+				arrayAlfabeto[19]++;
+				break;
+			case 'z':
+				arrayAlfabeto[20]++;
+				break;
+			}
+			
+			for (int j = 0; j < 21; j++) {
+				if (arrayAlfabeto[j] > 1) {
+					System.out.println(j);
+					return false;
+					
+				}
+			}
+			
+		}
+		return true;
 	}
 
 	/**
