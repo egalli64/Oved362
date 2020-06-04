@@ -1,4 +1,4 @@
-package m2ex;
+package beatrice;
 
 // import java.util.*;
 // import java.lang.Math.*;
