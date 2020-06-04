@@ -153,30 +153,34 @@ public class S03 {
                 result[0]=a;
                 result[1]=b;
                 result[2]=c;
-            }
+            } else {
             result[0]=a;
             result[1]=c;
             result[2]=b;
+            }
         }
+            
         else if((b<a)&&(b<c)) {
             if (a<c) {
                 result[0]=b;
                 result[1]=a;
                 result[2]=c;
-            }
+            } else {
             result[0]=b;
             result[1]=c;
             result[2]=a;
+            }
         }
         else if ((c<a)&&(c<b)) {
             if (a<b) {
                 result[0]=c;
                 result[1]=a;
                 result[2]=b;
-            }
+            } else {
             result[0]=c;
             result[1]=b;
             result[2]=a;
+            }
         }
         return result;
     }
