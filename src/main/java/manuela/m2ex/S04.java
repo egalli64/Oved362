@@ -47,8 +47,19 @@ public class S04 {
 	 * @return calculated square root
 	 */
 	public static double sqrt(double value) {
-	    // TODO
-	    return 0.0;
+	    //Newton's method
+		value = Math.abs(value);
+		if (value == 0)
+			return 0;
+		double oldRoot = value;
+		double newRoot = (oldRoot / 2 + value / (oldRoot * 2));
+
+		while (((oldRoot - newRoot) > 0.001)) {
+
+			oldRoot = newRoot;
+			newRoot = 0.5 * (oldRoot + value / oldRoot);
+		}
+		return newRoot;
 	}
 
 	/**
@@ -59,10 +70,22 @@ public class S04 {
 	 * @return calculated square root
 	 */
     public static double sqrt(double value, double epsilon) {
-        // TODO
-        return 0.0;
-    }
-	
+       value = Math.abs(value);
+		if (value == 0)
+			return 0;
+		double oldRoot = value;
+		double newRoot = 0.5 * (oldRoot + value / oldRoot);
+
+		while (((oldRoot - newRoot) > epsilon)) {
+
+			oldRoot = newRoot;
+			newRoot = 0.5 * (oldRoot + value / oldRoot);
+
+		}
+
+		return newRoot;
+	}
+
 	/**
 	 * Factorial
 	 * 
