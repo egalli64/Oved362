@@ -70,7 +70,7 @@ public class S06 {
 	 * 
 	 * @param dice array containing dice's results
 	 * @param cat  enum associated to a specific available combination in the game
-	 * @return
+	 * @return score based on the category
 	 */
 	public static int yahtzee(int[] dice, Category cat) {
 		return 0;
