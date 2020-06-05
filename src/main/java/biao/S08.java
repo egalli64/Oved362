@@ -99,7 +99,7 @@ public class S08 {
 		int [] array =new int[left.length + right.length];
 		int i=0;
 		int j=0;
-		while (i<left.length ) {
+		
 			while(j<right.length  && i<left.length ) {
 				System.out.println(i);	
 				System.out.println(j);	
@@ -111,7 +111,7 @@ public class S08 {
 					j++;
 				}
 			}
-		}
+		
 		while(i<left.length) {
 			array[i+j]=left[i];
 			i++;
