@@ -153,11 +153,10 @@ public class S03 {
                 result[0]=a;
                 result[1]=b;
                 result[2]=c;
-            } else {
-                result[0]=a;
-                result[1]=c;
-                result[2]=b;
-            }            
+            }
+            result[0]=a;
+            result[1]=c;
+            result[2]=b;
         }
         else if((b<a)&&(b<c)) {
             if (a<c) {
@@ -185,14 +184,9 @@ public class S03 {
 // PROVA SORT
     // DOMANDA X EMANUELE : perchè dentro main devo sempre mettere String[] args?
     public static void main(String[] args) {
-        if(args.length != 3) {
-            System.out.println("expcted 3 int params!");
-            return;
-        }
-        
-        int a = Integer.valueOf(args[0]);
-        int b = Integer.valueOf(args[1]);
-        int c = Integer.valueOf(args[2]);
+        int a = 3;
+        int b = 2;
+        int c = 1;
         System.out.println(Arrays.toString(sort(a,b,c)));
     }
 }
