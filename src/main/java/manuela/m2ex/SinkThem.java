@@ -189,7 +189,7 @@ public class SinkThem {
         int num = rand.nextInt(1, dim*dim-1);
         System.out.println("have been created "+num+" ships");
         for (int i = 0; i < num; i++) {
-        	boolean flag = st.place(rand.nextInt(dim), rand.nextInt(dim));
+        	st.place(rand.nextInt(dim), rand.nextInt(dim));
         }
         
         while (!st.done()) {
