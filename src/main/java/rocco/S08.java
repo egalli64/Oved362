@@ -1,9 +1,8 @@
 package rocco;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
+import java.util.TreeSet;
 
 public class S08 {
 	/**
@@ -23,7 +22,24 @@ public class S08 {
 		if(left.length() != right.length()) {
 			throw new UnsupportedOperationException("Not yet implemented");
 		}
-		return "";
+		int i = left.length() - 1;
+		int j = right.length() - 1 ;
+		int riporto = 0;
+		StringBuilder sb = new StringBuilder();
+		while(i >= 0 && j >= 0) {
+				int sum = riporto;
+				int c1 = Character.digit(left.charAt(i), 10);
+				int c2 = Character.digit(right.charAt(j), 10);
+				sum = c1 + c2;
+				i--;
+				j--;
+				sb.append(sum%2);
+				riporto = sum/2;
+		}
+		if(riporto != 0) {
+			sb.append(riporto);
+		}
+		return sb.reverse().toString();
 		
 	}
 
@@ -41,61 +57,33 @@ public class S08 {
 	 */
 	public static int[] mergeSorted(int[] left, int[] right) {
 		int[] result = new int[left.length + right.length];
-		result = changeLastDigit(left, right, result);
 		int i = 0;
 		int j = 0;
-		int k= 0;
-		while(i < left.length  && j < right.length) {
+		int k = 0;
+		while(i < left.length && j < right.length) {
 			if(left[i] < right[j]) {
 				result[k] = left[i];
 				i++;
 				k++;
 			} else if(right[j] < left[i]) {
 				result[k] = right[j];
-				k++;
 				j++;
+				k++;
 			} else {
 				result[k] = left[i];
 				result[k+1] = right[j];
-				i++;
 				k+=2;
 				j++;
+				i++;
 			}
 		}
-		return result;
-	}
-	
-	/**
-	 * changeLastDigit replaces the last elements if one array
-	 * is longer than another
-	 * 
-	 * <pre>
-	 * [*,*,*,*,7], [*,*,*,*] -> [*,*,*,*,*,*,*,*,7]
-	 * </pre>
-	 * 
-	 */
-	
-	private static int[] changeLastDigit(int[] left, int[] right, int[] result) {
-		int leftSize = left.length;
-		int rightSize = right.length;
-		int rest = leftSize - rightSize;
-		int resultsize = result.length;
-		if(rest > 0) {
-			while(rest >= 0) {
-				result[resultsize - 1] = left[leftSize - 1];
-				leftSize--;
-				resultsize--;
-				rest--;
-			}
+		while(i < left.length) {
+			result[i+j] = left[i];
+			i++;
 		}
-		if(rest < 0) {
-			rest = rest * -1;
-			while(rest >= 0) {
-				result[resultsize - 1] = right[rightSize - 1];
-				rightSize--;
-				resultsize--;
-				rest--;
-			}
+		while(j < right.length) {
+			result[i+j] = right[j];
+			j++;
 		}
 		return result;
 	}
@@ -112,11 +100,14 @@ public class S08 {
 	 * @return the only single value
 	 */
 	public static int getSingle(int[] values) {
-		Arrays.sort(values);
-		for (int i = 0; i < values.length -1; i+=2) {
-			System.out.println(values[i]);
-			if(values[i] != values[i+1]) {
-				return values[i];
+		int[] arrayIndex = new int[9];
+		for (int i = 0; i < values.length; i++) {
+			int value = values[i];
+			arrayIndex[value]++;
+		}
+		for (int j = 0; j < arrayIndex.length; j++) {
+			if(arrayIndex[j] == 1) {
+				return j;
 			}
 		}
 		return -1;
@@ -150,6 +141,24 @@ public class S08 {
 	 * @return true if s is an anagram of t
 	 */
 	public static boolean isAnagram(String s, String t) {
-		throw new UnsupportedOperationException("Not yet implemented");
+		if(s.length() != t.length()) {
+			throw new UnsupportedOperationException("Le srtringhe devono avere la stessa lunghezza");
+		}
+		s = s.toLowerCase();
+		t = t.toLowerCase();
+		Set<Character> set = new TreeSet<Character>();
+		for (int i = 0; i < s.length(); i++) {
+			set.add(s.charAt(i));
+		}
+		int dimension = t.length();
+		for (int j = 0; j < t.length(); j++) {
+			if(set.contains(t.charAt(j))) {
+				dimension--;
+			}
+		}
+		if(dimension == 0) {
+			return true;
+		}
+		return false;
 	}
 }

@@ -93,7 +93,7 @@ public class S05 {
 		for (int i = 0; i < data.length; i++) {
 			sum += data[i];
 		}
-		return sum/(double)data.length;
+		return sum/data.length;
 	}
 
 	/**
