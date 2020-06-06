@@ -1,9 +1,15 @@
 package biao;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Random;
-
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 public class S08 {
 	/**
 	 * Binary addition on strings
@@ -20,12 +26,13 @@ public class S08 {
 	 */
 
 	public static void main(String[] args) {
-		System.out.println(binarySum("10", "11"));
+//		System.out.println(binarySum("10", "11"));
 		//int[] array = { 1, 4,4, 2, 3, 3,5,6,7,5,7,2, 1,1 };
 		//getSingle(array);
-		int [] array1= {1,2,3,4};
+		int [] array1= {1,2,3,4,4};
 		int [] array2= {3,4,5,8};
-		mergeSorted(array1,array2);
+	//	mergeSorted(array1,array2);
+		System.out.println(isAnagram("helloo", "ollhe"));
 	}
 
 	public static String binarySum(String left, String right) {
@@ -187,6 +194,8 @@ public class S08 {
 			System.out.println( values[values.length-1]);
 		}
 		
+		
+		
 		return 0;
 	}
 
@@ -202,6 +211,44 @@ public class S08 {
 	 * @return true if no duplicates in
 	 */
 	public static boolean hasOnlyUnique(String s) {
+		Set<Character> alfa = new HashSet<Character>();
+		for(int i =0; i < s.length();i++) {
+			if(alfa.contains(s.charAt(i))) {
+				return false;
+			}else {
+				alfa.add(s.charAt(i));
+			}
+		}
+		//Set<Character> beta = new HashSet<Character>();
+		
+		Iterator<Character> value = alfa.iterator();
+		while (value.hasNext()) {
+			System.out.println(value.next());
+		}
+		HashMap <Character,Integer> iterable =new HashMap<Character,Integer>(); 
+		
+		for(Character i : alfa) {
+			iterable.put(i, 0);
+		}
+		for (Character i : iterable.keySet()) {
+			System.out.println(i);
+		}
+		Iterator<Character> value1 = iterable.keySet().iterator();
+		ArrayList <Character> a= new ArrayList<Character>();
+		a.add('a');
+		a.add('b');
+		a.add('c');
+		a.add(1, 'm');
+		
+		System.out.println(a);
+		
+		Collection <String> b = new ArrayList<String> ();
+		return true;
+	}
+	
+	
+	
+	public static boolean hasOnlyUnique1(String s) {
 		int[] arrayAlfabeto = new int[21];
 		s = s.toLowerCase();
 		for (int i = 0; i < s.length(); i++) {
@@ -291,6 +338,32 @@ public class S08 {
 	 * @return true if s is an anagram of t
 	 */
 	public static boolean isAnagram(String s, String t) {
-		throw new UnsupportedOperationException("Not yet implemented");
+		//throw new UnsupportedOperationException("Not yet implemented");
+		HashMap<Character,Integer> array1 = new HashMap<Character,Integer>();
+		HashMap<Character,Integer> array2 = new HashMap<Character,Integer>();
+		for(int i=0; i< s.length(); i++) {
+			if(array1.containsKey(s.charAt(i))) {
+				int num=array1.get(s.charAt(i));
+				array1.put(s.charAt(i), num+1);
+			}else {
+				array1.put(s.charAt(i), 1);
+			}
+		}
+		for(int i=0; i< t.length(); i++) {
+			if(array2.containsKey(t.charAt(i))) {
+				int num=array2.get(t.charAt(i));
+				array2.put(t.charAt(i), num+1);
+			}else {
+				array2.put(t.charAt(i), 1);
+			}
+		}
+		if(array1.equals(array2)) {
+			return true;
+		}else {
+			return false;
+		}
+//		System.out.println(array1);
+//		System.out.println(array2);
+//		return true;
 	}
 }

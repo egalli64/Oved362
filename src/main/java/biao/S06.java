@@ -34,7 +34,6 @@ public class S06 {
 			return true;
 		}else {
 			return false;
-		}
-		
+		}	
 	}		
 }
