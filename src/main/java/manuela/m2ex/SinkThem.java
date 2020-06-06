@@ -1,6 +1,8 @@
 package  manuela.m2ex;
 
 import java.util.Arrays;
+import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class SinkThem {
     static public final char SHIP = 'S';
@@ -24,9 +26,12 @@ public class SinkThem {
      * 
      * @param dimension board size
      */
+    //method to create grid
     public SinkThem(int dimension) {
-        // TODO
-        board = new char[0][0];
+        board = new char[dimension][dimension];
+        for (int i = 0; i < dimension; i++)
+        	for (int j = 0; j < dimension; j++)
+        		board[i][j] = EMPTY;
     }
 
     /**
@@ -62,8 +67,25 @@ public class SinkThem {
      * @return a string
      */
     public String getBoard() {
-        // TODO
-        return "* * *\n* * *\n* * *\n";
+    	//build board' s position
+    	StringBuilder sb = new StringBuilder();
+    	for (int i = 0; i < getBoardSize(); i++) {
+        	for (int j = 0; j < getBoardSize(); j++) {
+        		char actual = board[i][j];
+        		if (actual == WRECK || actual == MISS)
+        			sb.append(actual);
+        		else
+        			sb.append(UNKNOWN);
+        		sb.append("\t");
+        	}
+        	sb.append("\n");
+    	}
+        return sb.toString();
+    }
+    
+    private boolean isOkay(int row, int col) {
+    	return row >= 0 && row < getBoardSize() &&
+    			col >= 0 && col < getBoardSize();
     }
 
     /**
@@ -74,9 +96,20 @@ public class SinkThem {
      * @return false if it can't be placed
      */
     public boolean place(int row, int col) {
-        // TODO
-        return false;
+    	//
+        if(!isOkay(row, col)) {
+        	return false;
+        } else if (board[row][col] == EMPTY) {
+        	board[row][col] = SHIP;
+        	counter++;
+        	return true;
+        } else {
+        	return false;
+        }
+        
     }
+    
+    
 
     /**
      * Shoot to a cell
@@ -88,9 +121,27 @@ public class SinkThem {
      * @return true for a sink
      */
     public boolean shoot(int row, int col) {
-        // TODO
-        return false;
-    }
+    	//if you are outside the limits of the grid
+    	
+    	if(!isOkay(row, col)) {
+    		System.out.println("you're out of bounds!");
+        	return false;
+    	}
+    	
+    	//if you take a ship or a wreck, add points and decrement counter 
+    	if (board[row][col] == SHIP) {
+    		board[row][col] = WRECK;
+    		points += POINTS_FOR_SINK;
+    		counter--;
+    		System.out.println("STRICKEN!");
+    		return true;
+    	}
+    	//if you miss a ship, add point in point_for_miss
+	    	board[row][col] = MISS;
+	    	points += POINTS_FOR_MISS;
+	    	System.out.println("FAILED!");
+	        return false;
+    	}
 
     @Override
     public String toString() {
@@ -102,6 +153,7 @@ public class SinkThem {
      * 
      * @param st the game
      */
+    
     public static void shootAll(SinkThem st) {
         for (int i = 0; i < st.getBoardSize(); i++) {
             for (int j = 0; j < st.getBoardSize(); j++) {
@@ -120,18 +172,43 @@ public class SinkThem {
     }
 
     public static void main(String[] args) {
-        // TODO: use Scanner for user interaction
-
-        // TODO: let the player choose for a (sensible) board size
-        SinkThem st = new SinkThem(10);
-
-        // TODO: place the ships randomly instead
-        st.place(0, 2);
-        st.place(1, 1);
-        st.place(2, 0);
-
-        // TODO: use Scanner instead
-        shootAll(st);
+        //use Scanner for user interaction
+    	int dim = 0;
+    	Scanner scan = new Scanner(System.in);
+    	System.out.print("Please insert a dimension for board: ");
+        if (scan.hasNext()) {
+        	if (scan.hasNextInt())
+        		dim = scan.nextInt();
+        	else
+        		scan.next();
+        }
+        
+        SinkThem st = new SinkThem(dim);
+        
+        ThreadLocalRandom rand = ThreadLocalRandom.current();
+        int num = rand.nextInt(1, dim*dim-1);
+        System.out.println("have been created "+num+" ships");
+        for (int i = 0; i < num; i++) {
+        	boolean flag = st.place(rand.nextInt(dim), rand.nextInt(dim));
+        }
+        
+        while (!st.done()) {
+        	System.out.println("Shoot the ship! (i,j)");
+        	if (scan.hasNext()) {
+            	String s = scan.next();
+            	String split[] = s.split(",");
+            	int i, j;
+            	try {
+					i = Integer.parseInt(split[0]);
+					j = Integer.parseInt(split[1]);
+				} catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
+					System.out.println("Sorry!This format is incompatible");
+					continue;
+				}
+            	st.shoot(i, j);
+            }
+        }
+        scan.close();
 
         System.out.println(st);
         System.out.println("You scored " + st.getPoints());
