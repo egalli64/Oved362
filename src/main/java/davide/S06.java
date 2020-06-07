@@ -3,7 +3,7 @@ package davide;
 public class S06 {
 	/**
 	 * 
-	 * enum used in yahtzee funcion for specific combination of the game
+	 * enum used in yahtzee function for specific combination of the game
 	 *
 	 */
 	public enum Category {
@@ -48,10 +48,11 @@ public class S06 {
 			return true;
 		} else {
 			int sum = 0;
+			int temp = value;
 
-			while (value > 0) {
-				sum += Math.pow(value % 10, len);
-				value /= 10;
+			while (temp > 0) {
+				sum += Math.pow(temp % 10, len);
+				temp /= 10;
 			}
 
 			if (value == sum) {
@@ -83,10 +84,6 @@ public class S06 {
 			} else if (digit == 35) {
 				lettersIndex[20]++;
 			}
-		}
-		
-		for (int i : lettersIndex) {
-			System.out.println(i);
 		}
 		
 		for (int i = 0; i < lettersIndex.length; i++) {
