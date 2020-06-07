@@ -1,4 +1,4 @@
-package m2ex;
+package rocco;
 
 import java.util.Arrays;
 import java.util.Random;
