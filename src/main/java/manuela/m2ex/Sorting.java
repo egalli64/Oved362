@@ -8,12 +8,28 @@ public class Sorting {
     }
 
     public static void bubbleSort(int[] data) {
-        // TODO
+    	for(int i = 0; i < data.length; i++) {
+            boolean flag = false;
+            for(int j = 0; j < data.length-1; j++) {
+            	// If the element j is greater than the next then
+                // exchange the values
+                if(data[j]>data[j+1]) {
+                    int k = data[j];
+                    data[j] = data[j+1];
+                    data[j+1] = k;
+                    flag=true; //the change is happended and flag is true
+                }
+            }
+            if(!flag) break; // If flag = false then it means that in the last iteration
+            // there were no exchanges, so the method can end
+            // because the array is ordered
+        }
     }
 
     public static void selectionSort(int[] data) {
-        // TODO
-    }
+    	 
+       } 
+
 
     public static void insertionSort(int[] data) {
         // TODO
@@ -24,7 +40,7 @@ public class Sorting {
     }
 
     private static void mergeSort(int[] data, int left, int right) {
-        // TODO
+        
         int pivot = (left + right) / 2;
         merge(data, left, pivot, right);
     }
