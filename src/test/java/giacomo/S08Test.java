@@ -1,4 +1,4 @@
-package _exercises.giacomo;
+package giacomo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
