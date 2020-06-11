@@ -20,26 +20,65 @@ select max(salary) - min(salary) as salary_diff from employees;
 
 select job_id, max(salary) - min(salary) as salary_diff from employees group by job_id having salary_diff != '0.00';
 
-select min(salary) as salary from (select manager_id, salary from employees where salary > 6000) as s1 group by manager_id having manager_id is not null;
+select manager_id, min(salary) as salary from (
+	select manager_id, salary from employees where salary > 6000) as s1 
+group by manager_id having manager_id is not null;
 
 select first_name, last_name, street_address, postal_code, city, state_province, country_name from employees 
-	join departments using (department_id) 
-		join locations using (location_id)
-			join countries using (country_id);
-            
-select first_name, department_name from employees join departments using (department_id);
+join departments using (department_id) 
+join locations using (location_id)
+join countries using (country_id);
 
-select first_name, department_name from employees join departments using (department_id) where location_id in (select location_id from locations where city = 'Toronto');
+select first_name, department_name 
+from employees 
+join departments using (department_id) 
+where location_id in (
+	select location_id 
+    from locations 
+    where city = 'Toronto');
 
-select first_name, last_name from employees where hire_date > (select hire_date from employees where first_name = 'David' and last_name = 'Lee');
+select first_name, last_name, hire_date 
+from employees 
+where hire_date > (
+	select hire_date 
+    from employees 
+    where first_name = 'David' and last_name = 'Lee');
 
-select employee_id, hire_date from employees where employee_id in (select distinct manager_id from employees where manager_id is not null order by 1);
+select employee_id, hire_date 
+from employees 
+where employee_id in (
+	select distinct manager_id 
+    from employees 
+    where manager_id is not null order by 1);
 
-select first_name, last_name from employees as e join (select employee_id, hire_date from employees where employee_id in (select distinct manager_id from employees where manager_id is not null order by 1)) as m on e.manager_id = m.employee_id where e.hire_date < m.hire_date;
+select concat(first_name,' ',last_name) as Employee, e.hire_date 
+from employees as e 
+join (select employee_id, hire_date 
+from employees
+where employee_id in (
+select distinct manager_id 
+from employees 
+where manager_id is not null )) as m 
+on e.manager_id = m.employee_id 
+where e.hire_date < m.hire_date order by 1;
 
-select first_name, last_name, department_name from employees join departments using (department_id) where department_id in (
-	select department_id from departments join employees using (department_id) where regexp_like(last_name,'^a.'));
+select concat(first_name,' ',last_name) as Employee, department_name 
+from employees 
+join departments using (department_id) 
+where department_id in (
+	select department_id 
+    from departments 
+    join employees using (department_id) 
+    where regexp_like(last_name,'^a.'));
 
-select first_name, last_name from employees join departments using (department_id) where department_name = 'Shipping';
+select concat(first_name,' ',last_name) as Employee 
+from employees 
+join departments using (department_id) 
+where department_name = 'Shipping';
 
-select first_name, last_name from employees where manager_id in (select employee_id from employees where first_name = 'Steven' and last_name = 'King');
+select concat(first_name,' ',last_name) as Employee 
+from employees 
+where manager_id in (
+	select employee_id 
+    from employees 
+    where first_name = 'Steven' and last_name = 'King');
